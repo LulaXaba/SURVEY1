@@ -22,9 +22,6 @@ namespace SURVEY.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? Email { get; set; }
 
-        [Range(5, 120, ErrorMessage = "Age must be between 5 and 120")]
-        public int Age { get; set; }
-
         [Required]
         public DateTime Date { get; set; }
 
@@ -41,5 +38,7 @@ namespace SURVEY.Models
 
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int TV { get; set; }
+
+        public int Age => DateTime.Now.Year - DateOfBirth.Year - (DateTime.Now.DayOfYear < DateOfBirth.DayOfYear ? 1 : 0);
     }
 }
