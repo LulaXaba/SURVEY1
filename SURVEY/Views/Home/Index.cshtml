@@ -1,0 +1,233 @@
+﻿@model SurveyModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    /* Light blue border for checkboxes */
+    .form-check-input {
+        border: 2px solid #ADD8E6;
+        /* Optional: make border a bit bigger to be visible */
+    }
+
+        /* On focus, keep the border light blue */
+        .form-check-input:focus {
+            border-color: #ADD8E6;
+            box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5); /* subtle glow */
+        }
+
+    /* Add some spacing between checkboxes */
+    .form-check {
+        margin-right: 20px;
+    }
+
+    .table-lightgrey thead th {
+        background-color: #d3d3d3;
+        color: black;
+    }
+
+    .custom-submit-btn {
+        background-color: #B0E0E6 !important; /* Light blue */
+        color: white !important;
+        font-size: 10px;
+        border: none;
+        border-radius: 0 !important; /* Sharp corners */
+        padding: 3px 30px;
+        margin-left: -400px; /* Adjust position to the left */
+    }
+
+        .custom-submit-btn:hover {
+            background-color: #9dcde0 !important; /* Slightly darker on hover */
+        }
+
+
+
+</style>
+
+
+</nav>
+
+
+<div class="container mt-5">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <form method="post" asp-action="SubmitSurvey" class="needs-validation" novalidate>
+        <input type="hidden" name="Date" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" />
+        <div class="row"> 
+            <!-- Left Column: Personal Details -->
+             <div class="col-md-6">
+                <p class="mb-3" style="font-weight: normal; font-size: 10px;">Personal Details:</p>
+
+                <!-- 4 vertical text fields -->
+                <div class="d-flex justify-content-end">
+                    <div class="mb-4" style="width: 150px; font-size: 10px; margin-right: 233px;">
+                        <div style="margin-top: -45px;">
+                            <label for="Name" class="form-label">Full Names</label>
+                            <input type="text" id="Name" name="Name"
+                                   class="form-control rounded-0 mb-3"
+                                   style="height: 25px; border: 1px solid #ADD8E6;" />
+                        </div>
+                        <label for="Surname" class="form-label">Surname</label>
+                        <input type="text" id="Surname" name="Surname"
+                               class="form-control rounded-0 mb-3"
+                               style="height: 25px; border: 1px solid #ADD8E6;" />
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="text" id="Email" name="Email"
+                               class="form-control rounded-0 mb-3"
+                               style="height: 25px; border: 1px solid #ADD8E6;" />
+                        <label for="DateOfBirth" class="form-label">Date of Birth</label>
+                        <input type="date" id="DateOfBirth" name="DateOfBirth"
+                               class="form-control rounded-0 mb-3"
+                               style="height: 25px; border: 1px solid #ADD8E6;" />
+                        <label for="Age" class="form-label">Age</label>
+                        <input type="number" id="Age" name="Age" min="5" max="120"
+                               class="form-control rounded-0 mb-3"
+                               style="height: 25px; border: 1px solid #ADD8E6;" />
+                       
+                        <label for="ContactNumber" class="form-label">Contact Number</label>
+                        <input type="text" id="ContactNumber" name="ContactNumber"
+                               class="form-control rounded-0 mb-3"
+                               style="height: 25px; border: 1px solid #ADD8E6;" />
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- First Section -->
+        <div class="d-flex flex-column mb-4">
+            <div class="col-md-6">
+                <p class="mb-3" style="font-weight: normal; font-size: 10px;">What is your favorite food?</p>
+                <div class="d-flex gap-3" style="margin-left: 150px; margin-top: -30px; font-size: 10px;">
+                    <div class="form-check align-items-center">
+                        <input class="form-check-input" type="checkbox" name="FavouriteFoods" value="Pizza" id="foodPizza">
+                        <label class="form-check-label" for="foodPizza">Pizza</label>
+                    </div>
+
+                    <div class="form-check align-items-center">
+                        <input class="form-check-input" type="checkbox" name="FavouriteFoods" value="Pasta" id="foodPasta">
+                        <label class="form-check-label" for="foodPasta">Pasta</label>
+                    </div>
+
+                    <div class="form-check align-items-center">
+                        <input class="form-check-input" type="checkbox" name="FavouriteFoods" value="Pap and Wors" id="foodPap">
+                        <label class="form-check-label" for="foodPap">Pap and Wors</label>
+                    </div>
+
+                    <div class="form-check align-items-center">
+                        <input class="form-check-input" type="checkbox" name="FavouriteFoods" value="Other" id="foodOther">
+                        <label class="form-check-label" for="foodOther">Other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Section -->
+        <p class="mb-3" style="font-weight: normal; font-size: 10px;">
+            Please rate your level of agreement on a scale from 1 to 5, with 1 being "Strongly agree" and 5 being "Strongly disagree".
+        </p>
+
+      <table class="table table-bordered table-sm equal-width-table" style="width: 700px; font-size: 10px;">
+    <colgroup>
+        <col style="width: 7%;">
+        <col style="width: 7%;">
+        <col style="width: 7%;">
+        <col style="width: 7%;">
+        <col style="width: 7%;">
+        <col style="width: 7%;">
+    </colgroup>
+    <thead class="table-light">
+        <tr>
+                    <th style="text-align: center;"></th>
+                    <th style="text-align: center;">Strongly Agree</th>
+                    <th style="text-align: center;">Agree</th>
+                    <th style="text-align: center;">Neutral</th>
+                    <th style="text-align: center;">Disagree</th>
+                    <th style="text-align: center;">Strongly Disagree</th>
+
+        </tr>
+    </thead>
+            <tbody>
+                <tr style="background-color: #e6f7ff;">
+                    <td>I like to watch movies</td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Movies" value="1" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Movies" value="2" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Movies" value="3" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Movies" value="4" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Movies" value="5" style="accent-color: #ADD8E6;">
+                    </td>
+                </tr>
+                <tr style="background-color: #e6f7ff;">
+                    <td>I like to listen Radio</td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Raido" value="1" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Raido" value="2" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Raido" value="3" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Raido" value="4" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Raido" value="5" style="accent-color: #ADD8E6;">
+                    </td>
+                </tr>
+                <tr style="background-color: #e6f7ff;">
+                    <td>I like to eat out</td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Out" value="1" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Out" value="2" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Out" value="3" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Out" value="4" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="Out" value="5" style="accent-color: #ADD8E6;">
+                    </td>
+                </tr>
+                <tr style="background-color: #e6f7ff;">
+                    <td>I like to watch TV</td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="TV" value="1" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="TV" value="2" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="TV" value="3" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="TV" value="4" style="accent-color: #ADD8E6;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="radio" name="TV" value="5" style="accent-color: #ADD8E6;">
+                    </td>
+                </tr>
+            </tbody>
+
+
+         </table>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn custom-submit-btn">SUBMIT</button>
+        </div>
+    </form>
+</div>

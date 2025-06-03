@@ -1,0 +1,71 @@
+﻿@model SURVEY.Models.SurveyResultViewModel
+@{
+    ViewBag.Title = "Survey Results";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="font-size: 16px;">Survey Results</h2>
+
+
+    @if (!Model.HasSurveys)
+    {
+        <div class="alert alert-warning text-center">No Surveys Available.</div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <table class="table table-borderless" style="font-size: 10px;">
+                    <tr>
+                        <td>Total number of surveys:</td>
+                        <td>@Model.TotalSurveys</td>
+                    </tr>
+                    <tr>
+                        <td>Average age:</td>
+                        <td>@Model.AverageAge.ToString("0.0")</td>
+                    </tr>
+                    <tr>
+                        <td>Oldest participant age:</td>
+                        <td>@Model.OldestAge</td>
+                    </tr>
+                    <tr>
+                        <td>Youngest participant age:</td>
+                        <td>@Model.YoungestAge</td>
+                    </tr>
+                    <tr><td colspan="2" style="height: 20px;"></td></tr>
+
+                    <tr>
+                        <td>Percentage of people who like Pizza:</td>
+                        <td>@Model.PizzaPreferencePercentage.ToString("0.0") %</td>
+                    </tr>
+                    <tr>
+                        <td>Percentage of people who like Pasta:</td>
+                        <td>@Model.PastaPreferencePercentage.ToString("0.0") %</td>
+                    </tr>
+                    <tr>
+                        <td>Percentage of people who like Pap and Wors:</td>
+                        <td>@Model.PapAndWorsPreferencePercentage.ToString("0.0") %</td>
+                    </tr>
+                    <tr><td colspan="2" style="height: 20px;"></td></tr>
+
+                    <tr>
+                        <td>Average rating for watching movies:</td>
+                        <td>@Model.AverageMoviesRating.ToString("0.0")</td>
+                    </tr>
+                    <tr>
+                        <td>Average rating for listening to radio:</td>
+                        <td>@Model.AverageRaidoRating.ToString("0.0")</td>
+                    </tr>
+                    <tr>
+                        <td>Average rating for eating out:</td>
+                        <td>@Model.AverageEatOutRating.ToString("0.0")</td>
+                    </tr>
+                    <tr>
+                        <td>Average rating for watching TV:</td>
+                        <td>@Model.AverageTVRating.ToString("0.0")</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</div>
