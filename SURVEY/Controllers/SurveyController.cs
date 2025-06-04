@@ -64,9 +64,24 @@ namespace SURVEY.Controllers
         private int CalculateAge(DateTime dateOfBirth)
         {
             var today = DateTime.Today;
+            
+            // Validate date of birth
+            if (dateOfBirth > today)
+            {
+                return 5; // Return 5 for future dates
+            }
+            
             var age = today.Year - dateOfBirth.Year;
-            if (dateOfBirth.Date > today.AddYears(-age)) age--;
-            return age;
+            
+            // Check if birthday has occurred this year
+            if (dateOfBirth.Month > today.Month || 
+                (dateOfBirth.Month == today.Month && dateOfBirth.Day > today.Day))
+            {
+                age--;
+            }
+            
+            // Ensure minimum age is 5
+            return Math.Max(5, age);
         }
     }
 }
