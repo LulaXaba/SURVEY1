@@ -20,24 +20,52 @@
         margin-right: 20px;
     }
 
-    .table-lightgrey thead th {
-        background-color: #d3d3d3;
-        color: black;
+
+    /* Light blue border for radio buttons */
+    input[type="radio"] {
+        border: 2px solid #ADD8E6;
+        border-radius: 50%; /* Circular border */
+        appearance: none; /* Remove default styles */
+        width: 16px;
+        height: 16px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
     }
 
+        /* Show dot when selected */
+        input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: #ADD8E6;
+            border-radius: 50%;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+        }
+
+        /* Glow on focus */
+        input[type="radio"]:focus {
+            box-shadow: 0 0 0 2px rgba(173, 216, 230, 0.5);
+        }
+
     .custom-submit-btn {
-        background-color: #B0E0E6 !important; /* Light blue */
-        color: white !important;
-        font-size: 10px;
+        background-color: deepskyblue;
+        color: white;
         border: none;
-        border-radius: 0 !important; /* Sharp corners */
-        padding: 3px 30px;
-        margin-left: -400px; /* Adjust position to the left */
+        /* Adjust size */
+        padding: 4px 40px;
+        font-size: 14px;
+        /* Adjustable left position */
+        margin-left: -600px; /* You can change this value to move it more or less to the left */
     }
 
         .custom-submit-btn:hover {
-            background-color: #9dcde0 !important; /* Slightly darker on hover */
+            background-color: #87cefa;
         }
+
 
 
 
@@ -132,18 +160,18 @@
         <col style="width: 7%;">
         <col style="width: 7%;">
     </colgroup>
-    <thead class="table-light">
-         <tr>
-             <th style="text-align: center;"></th>
-             <th style="text-align: center;">Strongly Agree</th>
-             <th style="text-align: center;">Agree</th>
-             <th style="text-align: center;">Neutral</th>
-             <th style="text-align: center;">Disagree</th>
-             <th style="text-align: center;">Strongly Disagree</th>
+            <thead style="background-color: grey; border: 1px solid black;">
+                <tr>
+                    <th style="text-align: center; background-color: grey;border: 1px solid black;"></th>
+                    <th style="text-align: center; background-color: grey;border: 1px solid black;">Strongly Agree</th>
+                    <th style="text-align: center; background-color: grey;border: 1px solid black;">Agree</th>
+                    <th style="text-align: center; background-color: grey;border: 1px solid black;">Neutral</th>
+                    <th style="text-align: center; background-color: grey;border: 1px solid black;">Disagree</th>
+                    <th style="text-align: center; background-color: grey;border: 1px solid black;">Strongly Disagree</th>
+                </tr>
+            </thead>
 
-         </tr>
-     </thead>
-     <tbody>
+            <tbody>
                 <tr style="background-color: #e6f7ff;">
                     <td>I like to watch movies</td>
                     <td style="text-align: center;">
@@ -224,5 +252,6 @@
  <div class="text-center mt-4">
      <button type="submit" class="btn custom-submit-btn">SUBMIT</button>
         </div>
+
     </form>
  </div>
