@@ -38,5 +38,7 @@ namespace SURVEY.Models
 
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int TV { get; set; }
+
+        public int Age => DateTime.Now.Year - DateOfBirth.Year - (DateTime.Now.DayOfYear < DateOfBirth.DayOfYear ? 1 : 0);
     }
 }

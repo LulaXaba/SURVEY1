@@ -3,41 +3,151 @@
     ViewData["Title"] = "Home Page";
 }
 <style>
-    /* Light blue border for checkboxes */
-    .form-check-input {
-        border: 2px solid #ADD8E6;
-        /* Optional: make border a bit bigger to be visible */
+/* Light blue border for checkboxes */
+.form-check-input {
+    border: 2px solid #ADD8E6;
+}
+
+.form-check-input:focus {
+    border-color: #ADD8E6;
+    box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5);
+}
+
+.form-check {
+    margin-right: 20px;
+}
+
+/* Custom grey header for thead */
+thead.table-grey {
+    background-color: grey;
+    color: white; /* Changed from gray to white for better contrast */
+}
+
+    #DateOfBirth {
+        color: transparent;            /* hide text */
+        background-color: transparent;
+        border: none;
+        cursor: text;
+        height: 25px !important;
+        pointer-events: auto;          /* keep it clickable */
+    display: ;}
+
+    #DateOfBirth::-webkit-calendar-picker-indicator {
+        opacity: 0;                   /* hide calendar icon */
     }
 
-        /* On focus, keep the border light blue */
-        .form-check-input:focus {
-            border-color: #ADD8E6;
-            box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5); /* subtle glow */
-        }
-
-    /* Add some spacing between checkboxes */
-    .form-check {
-        margin-right: 20px;
+    #DateOfBirth:focus {
+        color: black !important;      /* show text */
+        background-color: white !important;
+        border: 1px solid #ADD8E6 !important;
+        outline: none;
     }
 
-    .table-lightgrey thead th {
-        background-color: #d3d3d3;
-        color: black;
+    #DateOfBirth:focus::-webkit-calendar-picker-indicator {
+        opacity: 1;                   /* show calendar icon on focus */
     }
+
+/* Style the entire table */
+table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Remove double borders */
+    margin-top: 20px; /* Add spacing above table */
+    font-family: Arial, sans-serif;
+    background-color: #fff; /* White background */
+}
+ 
+/* Style all table cells */
+th, td {
+    border: 1px solid #d0e7f9; /* Light blue border */
+    padding: 12px;
+    text-align: center; /* Center align radio buttons and headers */
+}
+ 
+/* Style table header cells */
+th {
+    background-color: rgb(105, 117, 128); /* Light grey-blue background */
+    color: #333; /* Dark text */
+    font-weight: normal;
+}
+ 
+/* Left-align the first column (question text) */
+td:first-child {
+    text-align: left;
+    font-weight: normal;
+}
+ 
+/* Style unselected radio buttons */
+input[type="radio"] {
+    appearance: none; /* Remove default styling */
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #5bc0de; /* Light blue border */
+    border-radius: 50%; /* Make it round */
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+ 
+/* Style the inner filled circle when selected */
+input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    background-color: #5bc0de; /* Light blue inner circle */
+    border-radius: 50%;
+}
+
+
+/* Thinner custom radio buttons */
+.custom-radio input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    border: 1px solid #5bc0de;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-radio input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 6px;
+    height: 6px;
+    background-color: #5bc0de;
+    border-radius: 50%;
+}
+
+th, td {
+    font-weight: normal !important;
+}
 
     .custom-submit-btn {
-        background-color: #B0E0E6 !important; /* Light blue */
+        background-color: #00aaff !important;  /* Brighter blue */
         color: white !important;
         font-size: 10px;
         border: none;
-        border-radius: 0 !important; /* Sharp corners */
-        padding: 3px 30px;
-        margin-left: -400px; /* Adjust position to the left */
+        border-radius: 4px !important;
+        padding: 6px 30px;
+        margin-left: -400px;
+        cursor: pointer; /* <-- Ensures it doesn't look disabled */
+        opacity: 1;       /* <-- Ensures full visibility */
+        transition: background-color 0.3s ease;
     }
 
-        .custom-submit-btn:hover {
-            background-color: #9dcde0 !important; /* Slightly darker on hover */
-        }
+    .custom-submit-btn:hover {
+        background-color: #008ecc !important; /* Darker on hover */
+    }
 
 
 
@@ -57,37 +167,36 @@
                 <p class="mb-3" style="font-weight: normal; font-size: 10px;">Personal Details:</p>
 
                 <!-- 4 vertical text fields -->
-                <div class="d-flex justify-content-end">
-                    <div class="mb-4" style="width: 150px; font-size: 10px; margin-right: 233px;">
-                        <div style="margin-top: -45px;">
-                            <label for="Name" class="form-label">Full Names</label>
-                            <input type="text" id="Name" name="Name"
-                                   class="form-control rounded-0 mb-3"
-                                   style="height: 25px; border: 1px solid #ADD8E6;" />
-                        </div>
-                        <label for="Surname" class="form-label">Surname</label>
-                        <input type="text" id="Surname" name="Surname"
-                               class="form-control rounded-0 mb-3"
-                               style="height: 25px; border: 1px solid #ADD8E6;" />
-                        <label for="Email" class="form-label">Email</label>
-                        <input type="text" id="Email" name="Email"
-                               class="form-control rounded-0 mb-3"
-                               style="height: 25px; border: 1px solid #ADD8E6;" />
-                        <label for="DateOfBirth" class="form-label">Date of Birth</label>
-                        <input type="date" id="DateOfBirth" name="DateOfBirth"
-                               class="form-control rounded-0 mb-3"
-                               style="height: 25px; border: 1px solid #ADD8E6;" />
-                        <label for="Age" class="form-label">Age</label>
-                        <input type="number" id="Age" name="Age" min="5" max="120"
-                               class="form-control rounded-0 mb-3"
-                               style="height: 25px; border: 1px solid #ADD8E6;" />
-                       
-                        <label for="ContactNumber" class="form-label">Contact Number</label>
-                        <input type="text" id="ContactNumber" name="ContactNumber"
-                               class="form-control rounded-0 mb-3"
-                               style="height: 25px; border: 1px solid #ADD8E6;" />
-                    </div>
-                </div>
+<div class="d-flex justify-content-end">
+<div class="mb-4" style="width: 150px; font-size: 10px; margin-right: 233px;">
+<div style="margin-top: -45px;">
+<label for="Name" class="form-label" style="margin-bottom: 2px;">Full Names</label>
+<input type="text" id="Name" name="Name"
+                   class="form-control rounded-0"
+                   style="height: 25px; border: 1px solid #ADD8E6; margin-bottom: 10px;" />
+</div>
+ 
+        <label for="Surname" class="form-label" style="margin-bottom: 2px;">Surname</label>
+<input type="text" id="Surname" name="Surname"
+               class="form-control rounded-0"
+               style="height: 25px; border: 1px solid #ADD8E6; margin-bottom: 10px;" />
+ 
+        <label for="Email" class="form-label" style="margin-bottom: 2px;">Email</label>
+<input type="text" id="Email" name="Email"
+               class="form-control rounded-0"
+               style="height: 25px; border: 1px solid #ADD8E6; margin-bottom: 10px;" />
+ 
+        <label for="DateOfBirth" class="form-label" style="margin-bottom: 2px;">Date of Birth</label>
+<input type="date" id="DateOfBirth" name="DateOfBirth"
+               class="form-control rounded-0"
+               style="height: 25px; border: 1px solid #ADD8E6; margin-bottom: 10px;" />
+ 
+        <label for="ContactNumber" class="form-label" style="margin-bottom: 2px;">Contact Number</label>
+<input type="text" id="ContactNumber" name="ContactNumber"
+               class="form-control rounded-0"
+               style="height: 25px; border: 1px solid #ADD8E6; margin-bottom: 10px;" />
+</div>
+</div>
 
 
             </div>
@@ -137,17 +246,16 @@
         <col style="width: 7%;">
         <col style="width: 7%;">
     </colgroup>
-    <thead class="table-light">
-        <tr>
-                    <th style="text-align: center;"></th>
-                    <th style="text-align: center;">Strongly Agree</th>
-                    <th style="text-align: center;">Agree</th>
-                    <th style="text-align: center;">Neutral</th>
-                    <th style="text-align: center;">Disagree</th>
-                    <th style="text-align: center;">Strongly Disagree</th>
-
-        </tr>
-    </thead>
+ <thead>
+     <tr>
+         <th style="background-color: rgb(197, 197, 197);border: 1px solid black;"></th>
+         <th style="background-color: rgb(197, 197, 197);border: 1px solid black;">Strongly Agree</th>
+         <th style="background-color: rgb(197, 197, 197);border: 1px solid black;">Agree</th>
+         <th style="background-color: rgb(197, 197, 197);border: 1px solid black;">Neutral</th>
+         <th style="background-color: rgb(197, 197, 197);border: 1px solid black;">Disagree</th>
+         <th style="background-color: rgb(197, 197, 197);border: 1px solid black;">Strongly Disagree</th>
+     </tr>
+ </thead>
             <tbody>
                 <tr style="background-color: #e6f7ff;">
                     <td>I like to watch movies</td>

@@ -19,6 +19,11 @@ namespace SURVEY.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            var stringListComparer = new ValueComparer<List<string>>(
+                (c1, c2) => c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                c => c.ToList());
+
             modelBuilder.Entity<SurveyModel>()
                 .Property(s => s.FavouriteFoods)
                 .HasConversion(
