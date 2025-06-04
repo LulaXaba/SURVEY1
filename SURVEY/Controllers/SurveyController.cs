@@ -12,7 +12,7 @@ namespace SURVEY.Controllers
         // Constructor injection of ApplicationDBContext
         public SurveyController(ApplicationDBContext context)
         {
-            _applicationDBContex= context;
+            _applicationDBContex = context;
         }
 
         public IActionResult Index()
@@ -22,7 +22,7 @@ namespace SURVEY.Controllers
 
         public ActionResult ViewResults()
         {
-            var surveys = _applicationDBContex.Surveys.ToList(); // Use your DbSet here
+            var surveys = _applicationDBContex.Surveys.ToList();
 
             if (!surveys.Any())
             {
@@ -30,9 +30,9 @@ namespace SURVEY.Controllers
             }
 
             var total = surveys.Count;
-            var averageAge = surveys.Average(s => s.Age);
-            var oldest = surveys.Max(s => s.Age);
-            var youngest = surveys.Min(s => s.Age);
+            var averageAge = surveys.Average(s => CalculateAge(s.DateOfBirth));
+            var oldest = surveys.Max(s => CalculateAge(s.DateOfBirth));
+            var youngest = surveys.Min(s => CalculateAge(s.DateOfBirth));
             var pizzaCount = surveys.Count(s => s.FavouriteFoods.Contains("Pizza"));
             var avgEatOut = surveys.Average(s => s.Out);
 
@@ -43,7 +43,6 @@ namespace SURVEY.Controllers
                 OldestAge = oldest,
                 YoungestAge = youngest,
                 PizzaPreferencePercentage = Math.Round((double)pizzaCount / total * 100, 1),
-                // Now represents the average of the Out property (Eat Out rating)
                 AverageEatOutRating = Math.Round(avgEatOut, 1)
             };
 
@@ -60,6 +59,14 @@ namespace SURVEY.Controllers
                 return RedirectToAction("ViewResults");
             }
             return View("Index", model);
+        }
+
+        private int CalculateAge(DateTime dateOfBirth)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - dateOfBirth.Year;
+            if (dateOfBirth.Date > today.AddYears(-age)) age--;
+            return age;
         }
     }
 }

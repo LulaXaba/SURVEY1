@@ -22,9 +22,6 @@ namespace SURVEY.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? Email { get; set; }
 
-        [Range(5, 120, ErrorMessage = "Age must be between 5 and 120")]
-        public int Age { get; set; }
-
         [Required]
         public DateTime Date { get; set; }
 
@@ -34,7 +31,7 @@ namespace SURVEY.Models
         public int Movies { get; set; }
 
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
-        public int Raido { get; set; }
+        public int Radio { get; set; }
 
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int Out { get; set; }
